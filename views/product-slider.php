@@ -26,7 +26,7 @@ foreach ($p_array as $key => $value) {
 
     $term_object = get_term($value);
     $cat_name = $term_object->slug;
-    //echo $cat_name;
+
     $all_ids = get_posts(array(
         'post_type' => 'product',
         'numberposts' => -1,
@@ -73,10 +73,12 @@ foreach ($p_array as $key => $value) {
 
                                 $productname = get_the_title($cat_pro);
                                 $image = get_the_post_thumbnail($cat_pro, 'thumbnail');
+                                $permalink = get_permalink($cat_pro);
 
                                 $_product = wc_get_product($cat_pro);
                                 $reg_price = $_product->get_regular_price($cat_pro);
                                 $price = $_product->get_price($cat_pro);
+
 
 
                             ?>
@@ -85,7 +87,7 @@ foreach ($p_array as $key => $value) {
                                         <div class="bbb_viewed_image"><img src="<?php echo $image; ?>"></div>
                                         <div class="bbb_viewed_content text-center">
                                             <div class="bbb_viewed_price"><?php echo $price; ?><span><?php echo $reg_price; ?></span></div>
-                                            <div class="bbb_viewed_name"><a href="#"><?php echo $productname; ?></a></div>
+                                            <div class="bbb_viewed_name"><a href="<?php echo $permalink; ?>"><?php echo $productname; ?></a></div>
                                         </div>
                                         <ul class="item_marks">
                                             <li class="item_mark item_discount">-25%</li>

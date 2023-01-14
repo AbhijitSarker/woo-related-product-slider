@@ -33,9 +33,9 @@ function related_products_enqueue_files()
     wp_enqueue_style('bootstrap', PLUGINS_PATH_ASSETS . 'css/bootstrap.min.css');
     wp_enqueue_style('product-slider', PLUGINS_PATH_ASSETS . 'css/style.css');
 
+    wp_enqueue_script('script', PLUGINS_PATH_ASSETS . 'js/script.js', array('jquery'), false, true);
     wp_enqueue_script('relatedpro', PLUGINS_PATH_ASSETS . 'js/bootstrap.bundle.min.js', array('bootstrap'), false, true);
     wp_enqueue_script('jquery', PLUGINS_PATH_ASSETS . 'js/jquery.min.js', array('jquery'), false, true);
-    wp_enqueue_script('script', PLUGINS_PATH_ASSETS . 'js/script.js', array('jquery'), false, true);
 }
 
 
