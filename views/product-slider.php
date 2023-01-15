@@ -1,15 +1,15 @@
 <?php
-global $product;
+// global $product;
 
-$product_id = $product->get_id();
+// $product_id = $product->get_id();
 
-$product_name = $product->get_name();
-$product_cat = $product->get_categories();
-$product_img = $product->get_image();
+// $product_name = $product->get_name();
+// $product_cat = $product->get_categories();
+// $product_img = $product->get_image();
 
-$product_reg_price = $product->get_regular_price();
-$product_price = $product->get_price();
-$pro_cat_id = $product->get_category_ids();
+// $product_reg_price = $product->get_regular_price();
+// $product_price = $product->get_price();
+// $pro_cat_id = $product->get_category_ids();
 
 
 // echo $product_name;
@@ -46,6 +46,7 @@ foreach ($p_array as $key => $value) {
     }
 }
 // print_r($prod_array);
+// var_dump($all_ids);
 
 
 ?>
@@ -69,31 +70,35 @@ foreach ($p_array as $key => $value) {
                         <div class="owl-carousel owl-theme bbb_viewed_slider">
                             <?php foreach ($prod_array as $cat_pro) {
                                 // global $product;
-                                $cat_pro;
+                                var_dump($cat_pro);
 
                                 $productname = get_the_title($cat_pro);
-                                $image = get_the_post_thumbnail($cat_pro, 'thumbnail');
+                                $image = wp_get_attachment_image_src($cat_pro, 'full');
                                 $permalink = get_permalink($cat_pro);
 
                                 $_product = wc_get_product($cat_pro);
                                 $reg_price = $_product->get_regular_price($cat_pro);
                                 $price = $_product->get_price($cat_pro);
 
+                                var_dump($image);
+                                // $product = get_product($cat_pro);
+
 
 
                             ?>
                                 <div class="owl-item">
                                     <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="bbb_viewed_image"><img src="<?php echo $image; ?>"></div>
-                                        <div class="bbb_viewed_content text-center">
-                                            <div class="bbb_viewed_price"><?php echo $price; ?><span><?php echo $reg_price; ?></span></div>
-                                            <div class="bbb_viewed_name"><a href="<?php echo $permalink; ?>"><?php echo $productname; ?></a></div>
-                                        </div>
-                                        <ul class="item_marks">
-                                            <li class="item_mark item_discount">-25%</li>
-                                            <li class="item_mark item_new">new</li>
-                                        </ul>
+                                        <div class="bbb_viewed_image"></div><img src="<?php echo $image; ?>">
                                     </div>
+                                    <div class="bbb_viewed_content text-center">
+                                        <div class="bbb_viewed_price"><?php echo $price; ?><span><?php echo $reg_price; ?></span></div>
+                                        <div class="bbb_viewed_name"><a href="<?php echo $permalink; ?>"><?php echo $productname; ?></a></div>
+                                        <?php echo "<a href='" . $_product->add_to_cart_url() . "'>add to cart</a>"; ?>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
                             <?php } ?>
                         </div>
@@ -102,4 +107,5 @@ foreach ($p_array as $key => $value) {
             </div>
         </div>
     </div>
+</div>
 </div>

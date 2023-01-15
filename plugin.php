@@ -29,13 +29,15 @@ add_action('wp_enqueue_scripts', 'related_products_enqueue_files');
 function related_products_enqueue_files()
 {
 
-    wp_enqueue_style('all', PLUGINS_PATH_ASSETS . 'css/all.css', array('bootstrap'), false, true);
+    wp_enqueue_style('all', PLUGINS_PATH_ASSETS . 'css/all.css', array(), false, true);
     wp_enqueue_style('bootstrap', PLUGINS_PATH_ASSETS . 'css/bootstrap.min.css');
+    wp_enqueue_style('owl-carousel', PLUGINS_PATH_ASSETS . 'css/owl.carousel.min.css');
+    wp_enqueue_style('owl-theme', PLUGINS_PATH_ASSETS . 'css/owl.theme.default.css');
     wp_enqueue_style('product-slider', PLUGINS_PATH_ASSETS . 'css/style.css');
 
+    wp_enqueue_script('relatedpro', PLUGINS_PATH_ASSETS . 'js/bootstrap.bundle.min.js', array(), false, true);
+    wp_enqueue_script('owl-carousel-js', PLUGINS_PATH_ASSETS . 'js/owl.carousel.js', array(), false, true);
     wp_enqueue_script('script', PLUGINS_PATH_ASSETS . 'js/script.js', array('jquery'), false, true);
-    wp_enqueue_script('relatedpro', PLUGINS_PATH_ASSETS . 'js/bootstrap.bundle.min.js', array('bootstrap'), false, true);
-    wp_enqueue_script('jquery', PLUGINS_PATH_ASSETS . 'js/jquery.min.js', array('jquery'), false, true);
 }
 
 
