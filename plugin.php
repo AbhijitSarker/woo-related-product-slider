@@ -46,3 +46,32 @@ function related_products_ralated_product()
 {
     require(PLUGINS_DIR . 'views/product-slider.php');
 }
+
+
+
+
+add_action('admin_menu', 'related_products_settings_pages');
+function related_products_settings_pages()
+{
+    add_menu_page(
+        'Plugin Name',
+        'Plugin Menu',
+        'manage_options',
+        'related_products_slider',
+        'related_products_settings_page_markup',
+        'dashicons-slides',
+        10
+    );
+}
+
+function related_products_settings_page_markup()
+{
+?>
+    <div class="wrap">
+        <h1>Related Product Slider</h1>
+        <h3>Slider settings Content</h3>
+    </div>
+
+
+<?php
+}
