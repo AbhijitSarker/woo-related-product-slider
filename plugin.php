@@ -55,7 +55,7 @@ function related_products_settings_pages()
 {
     add_menu_page(
         'Plugin Name',
-        'Plugin Menu',
+        'Related Products',
         'manage_options',
         'related_products_slider',
         'related_products_settings_page_markup',
@@ -74,4 +74,16 @@ function related_products_settings_page_markup()
 
 
 <?php
+}
+
+
+
+$filter_name = "plugin_action_links_" . plugin_basename(__FILE__);
+add_filter($filter_name, 'related_products_settings_link');
+
+function related_products_settings_link($links)
+{
+    $settings_link = '<a href= "admin.php?page=related_products_slider">' . __('Settings') . '</a>';
+    array_push($links, $settings_link);
+    return $links;
 }

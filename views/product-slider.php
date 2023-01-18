@@ -4,31 +4,48 @@ $product_id = $product->get_id();
 // echo $product_id;
 
 
-
-
-global $wp_query;
 global $post;
-
-$terms_post = get_the_terms($post->cat_ID, 'product_cat');
-// var_dump($terms_post);
-
-$product_cat_arr = array();
-foreach ($terms_post as $term_cat) {
-    $term_cat_id = $term_cat->term_id;
-    // echo $term_cat_id;
-    array_push($product_cat_arr, $term_cat_id);
+$product_cat_array = array();
+$terms = get_the_terms($post->ID, 'product_cat');
+foreach ($terms as $term) {
+    $product_cat_id = $term->term_id;
+    // echo $product_cat_id;
+    array_push($product_cat_array, $product_cat_id);
 }
-// var_dump($product_cat_arr);
-
-$categories = get_categories('orderby=name&hide_empty=0');
-foreach ($categories as $category) :
-    $catids = $category->term_id;
-    $catname = $category->name;
-endforeach;
+// var_dump($product_cat_array);
 
 
-$cat_name = get_the_category_by_ID($product_cat_arr);
-echo $cat_name;
+
+
+
+
+
+
+
+// global $wp_query;
+// global $post;
+
+// $terms_post = get_the_terms($post->cat_ID, 'product_cat');
+// // var_dump($terms_post);
+
+// $product_cat_arr = array();
+// foreach ($terms_post as $term_cat) {
+//     $term_cat_id = $term_cat->term_id;
+//     // echo $term_cat_id;
+//     array_push($product_cat_arr, $term_cat_id);
+// }
+// // var_dump($product_cat_arr);
+
+// $categories = get_categories('orderby=name&hide_empty=0');
+// var_dump($categories);
+// foreach ($categories as $category) :
+//     $catids = $category->term_id;
+//     $catname = $category->name;
+// endforeach;
+
+
+// $cat_name = get_the_category_by_ID($product_cat_arr);
+// echo $cat_name;
 
 
 
