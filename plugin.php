@@ -19,11 +19,13 @@ if (!defined('ABSPATH')) {
     die;
 }
 
-
+//Defining constants
 define("PLUGINS_DIR", plugin_dir_path(__FILE__));
 define("PLUGINS_PATH_ASSETS", plugin_dir_url(__FILE__) . 'assets/');
 define("PLUGINS_DIR_IMG", plugin_dir_url(__FILE__) . 'assets/img/');
 
+
+//enqueueing scripts
 add_action('wp_enqueue_scripts', 'related_products_enqueue_files');
 
 function related_products_enqueue_files()
@@ -41,7 +43,10 @@ function related_products_enqueue_files()
 }
 
 
+
+//slider template
 add_action('woocommerce_after_single_product_summary', 'related_products_ralated_product', 999);
+
 function related_products_ralated_product()
 {
     require(PLUGINS_DIR . 'views/product-slider.php');
@@ -49,7 +54,7 @@ function related_products_ralated_product()
 
 
 
-
+//settings options
 add_action('admin_menu', 'related_products_settings_pages');
 function related_products_settings_pages()
 {
@@ -66,14 +71,7 @@ function related_products_settings_pages()
 
 function related_products_settings_page_markup()
 {
-?>
-    <div class="wrap">
-        <h1>Related Product Slider</h1>
-        <h3>Slider settings Content</h3>
-    </div>
-
-
-<?php
+    require(PLUGINS_DIR . 'views/admin.php');
 }
 
 
