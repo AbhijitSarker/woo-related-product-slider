@@ -75,8 +75,9 @@ function related_products_settings_page_markup()
 }
 
 
-
+//add settings ling in the plugin list
 $filter_name = "plugin_action_links_" . plugin_basename(__FILE__);
+
 add_filter($filter_name, 'related_products_settings_link');
 
 function related_products_settings_link($links)
