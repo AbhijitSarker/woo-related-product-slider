@@ -1,18 +1,36 @@
 <?php
-global $product;
-$product_id = $product->get_id();
-// echo $product_id;
-
-
 global $post;
-$product_cat_array = array();
+
 $terms = get_the_terms($post->ID, 'product_cat');
+
 foreach ($terms as $term) {
-    $product_cat_id = $term->term_id;
-    // echo $product_cat_id;
-    array_push($product_cat_array, $product_cat_id);
+
+    $cat_id = $term->term_id;
+
+    $cat_name = get_the_category_by_ID($cat_id);
+
+    $all_product_ids = get_posts(array(
+        'post_type' => 'product',
+        'numberposts' => -1,
+        'post_status' => 'publish',
+        'fields' => 'ids',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'slug',
+                'terms' => $cat_name, /*category name*/
+                'operator' => 'IN',
+            )
+        ),
+    ));
+
+    foreach ($all_product_ids as $single_product_id) {
+        echo $single_product_id;
+    }
 }
-// var_dump($product_cat_array);
+
+
+
 
 
 
