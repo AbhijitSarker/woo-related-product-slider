@@ -3,6 +3,7 @@ global $post;
 
 $terms = get_the_terms($post->ID, 'product_cat');
 
+$related_products_array = array();
 foreach ($terms as $term) {
 
     $cat_id = $term->term_id;
@@ -24,108 +25,20 @@ foreach ($terms as $term) {
         ),
     ));
 
+
     foreach ($all_product_ids as $single_product_id) {
-        echo $single_product_id;
+        array_push($related_products_array, $single_product_id);
     }
 }
 
 
 
-
-
-
-
-
-
-
-
-
-// global $wp_query;
-// global $post;
-
-// $terms_post = get_the_terms($post->cat_ID, 'product_cat');
-// // var_dump($terms_post);
-
-// $product_cat_arr = array();
-// foreach ($terms_post as $term_cat) {
-//     $term_cat_id = $term_cat->term_id;
-//     // echo $term_cat_id;
-//     array_push($product_cat_arr, $term_cat_id);
-// }
-// // var_dump($product_cat_arr);
-
-// $categories = get_categories('orderby=name&hide_empty=0');
-// var_dump($categories);
-// foreach ($categories as $category) :
-//     $catids = $category->term_id;
-//     $catname = $category->name;
-// endforeach;
-
-
-// $cat_name = get_the_category_by_ID($product_cat_arr);
-// echo $cat_name;
-
-
-
-
-// $all_products = get_posts(array(
-//     'post_type' => 'product',
-//     'numberposts' => -1,
-//     'post_status' => 'publish',
-//     'tax_query' => array(
-//         array(
-//             'taxonomy' => 'product_cat',
-//             'field' => 'slug',
-//             'terms' => $product_cat_arr, /*category name*/
-//             'operator' => 'IN',
-//         )
-//     ),
-// ));
-// var_dump($all_products);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $term_arr_lists = get_the_terms($product_id, 'product_cat');
-
-// $cat_slug_arr = array();
-
-
-
-
-
-// foreach ($term_arr_lists as $term_arr_list) {
-
-//     // echo '</pre>';
-//     $taxonomy_id = $term_arr_list->slug;
-
-//     array_push($cat_slug_arr, $taxonomy_id);
-// }
-
-// $cat_arrs = json_encode(array_values($cat_slug_arr));
-
-// // Get shirts.
-// $args = array(
-//     'category' => array('hoodie'),
-// );
-// $products = wc_get_products($args);
-// //$products_query = new WP_Query($args);
-// echo '<pre>';
-// print_r($products);
-// echo '</pre>';
-
-
 ?>
+
+
+
+
+
 
 
 
@@ -143,84 +56,38 @@ foreach ($terms as $term) {
                     </div>
                     <div class="bbb_viewed_slider_container">
                         <div class="owl-carousel owl-theme bbb_viewed_slider">
-                            <div class="owl-item">
-                                <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg" alt=""></div>
-                                    <div class="bbb_viewed_content text-center">
-                                        <div class="bbb_viewed_price">₹12225<span>₹13300</span></div>
-                                        <div class="bbb_viewed_name"><a href="#">Alkatel Phone</a></div>
+
+                            <?php
+                            foreach ($related_products_array as $product_id) {
+                                $product_info = wc_get_product($product_id);
+
+                                $product_name = get_the_title($product_id);
+
+                                $permalink = get_permalink($product_id);
+
+                                $reg_price = $product_info->get_regular_price($product_id);
+
+                                $product_price = $product_info->get_price($product_id);
+
+                                $product_image = wp_get_attachment_image_src(get_post_thumbnail_id($product_id), 'single-post-thumbnail');
+
+
+
+                            ?>
+                                <div class="owl-item">
+                                    <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="bbb_viewed_image"><img src="<?php echo $product_image[0]; ?>" alt=""></div>
+                                        <div class="bbb_viewed_content text-center">
+                                            <div class="bbb_viewed_price"><?php echo $product_price; ?><span><?php echo $reg_price; ?></span></div>
+                                            <div class="bbb_viewed_name"><a href="<?php echo $permalink; ?>"><?php echo $product_name; ?></a></div>
+                                        </div>
+                                        <ul class="item_marks">
+                                            <li class="item_mark item_discount">Sale</li>
+                                            <li class="item_mark item_new">new</li>
+                                        </ul>
                                     </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
                                 </div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924221/51_be7qfhil.jpg" alt=""></div>
-                                    <div class="bbb_viewed_content text-center">
-                                        <div class="bbb_viewed_price">₹30079</div>
-                                        <div class="bbb_viewed_name"><a href="#">Samsung LED</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924241/8fbb415a2ab2a4de55bb0c8da73c4172--ps.jpg" alt=""></div>
-                                    <div class="bbb_viewed_content text-center">
-                                        <div class="bbb_viewed_price">₹22250</div>
-                                        <div class="bbb_viewed_name"><a href="#">Samsung Mobile</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="bbb_viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924275/images.jpg" alt=""></div>
-                                    <div class="bbb_viewed_content text-center">
-                                        <div class="bbb_viewed_price">₹1379</div>
-                                        <div class="bbb_viewed_name"><a href="#">Huawei Power</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924361/21HmjI5eVcL.jpg" alt=""></div>
-                                    <div class="bbb_viewed_content text-center">
-                                        <div class="bbb_viewed_price">₹225<span>₹300</span></div>
-                                        <div class="bbb_viewed_name"><a href="#">Sony Power</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924241/8fbb415a2ab2a4de55bb0c8da73c4172--ps.jpg" alt=""></div>
-                                    <div class="bbb_viewed_content text-center">
-                                        <div class="bbb_viewed_price">₹13275</div>
-                                        <div class="bbb_viewed_name"><a href="#">Speedlink Mobile</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
