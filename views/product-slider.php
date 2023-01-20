@@ -70,9 +70,6 @@ foreach ($terms as $term) {
                                 $product_price = $product_info->get_price($product_id);
 
                                 $product_image = wp_get_attachment_image_src(get_post_thumbnail_id($product_id), 'single-post-thumbnail');
-
-
-
                             ?>
                                 <div class="owl-item">
                                     <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
@@ -87,7 +84,9 @@ foreach ($terms as $term) {
                                         </ul>
                                     </div>
                                 </div>
-                            <?php } ?>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
