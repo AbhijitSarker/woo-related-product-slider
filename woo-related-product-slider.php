@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       Related Products Slider
  * Plugin URI:        https://github.com/AbhijitSarker
- * Description:       Add custom tabs in the product edit page.
+ * Description:       Custom related product slider.
  * Version:           1.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
