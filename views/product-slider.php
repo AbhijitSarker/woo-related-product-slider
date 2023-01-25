@@ -4,6 +4,7 @@ global $post;
 $terms = get_the_terms($post->ID, 'product_cat');
 
 $related_products_array = array();
+
 foreach ($terms as $term) {
 
     $cat_id = $term->term_id;
@@ -31,16 +32,7 @@ foreach ($terms as $term) {
     }
 }
 
-
-
 ?>
-
-
-
-
-
-
-
 
 <div class="bbb_viewed">
     <div class="container">
@@ -48,7 +40,7 @@ foreach ($terms as $term) {
             <div class="col">
                 <div class="bbb_main_container">
                     <div class="bbb_viewed_title_container">
-                        <h3 class="bbb_viewed_title">Best selling products</h3>
+                        <h3 class="bbb_viewed_title">Related Products</h3>
                         <div class="bbb_viewed_nav_container">
                             <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
                             <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
@@ -77,6 +69,7 @@ foreach ($terms as $term) {
                                         <div class="bbb_viewed_content text-center">
                                             <div class="bbb_viewed_price"><?php echo $product_price; ?><span><?php echo $reg_price; ?></span></div>
                                             <div class="bbb_viewed_name"><a href="<?php echo $permalink; ?>"><?php echo $product_name; ?></a></div>
+                                            <a href="<?php echo $product_info->add_to_cart_url(); ?>">Add to Cart</a>
                                         </div>
                                         <ul class="item_marks">
                                             <li class="item_mark item_discount">Sale</li>
